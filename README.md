@@ -7,3 +7,6 @@ A new Flutter project.
 
 ## Use an external package
 ![Screenshot](images/02.PNG)
+
+## Add a stateful widget and create and infinite scrolling ListView
+![Screenshot](images/03.PNG)
