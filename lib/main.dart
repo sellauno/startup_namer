@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:like_button/like_button.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,9 +29,24 @@ class _RandomWordsState extends State<RandomWords> {
           _suggestions.addAll(generateWordPairs().take(10));
         }
         return ListTile(
-          title: Text(
-            _suggestions[index].asPascalCase,
-            style: _biggerFont,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                _suggestions[index].asPascalCase,
+                style: _biggerFont,
+              ),
+              LikeButton(
+                size: 80,
+                animationDuration: const Duration(milliseconds: 0),
+                likeBuilder: (bool isLiked) {
+                  return Icon(
+                    isLiked ? Icons.favorite : Icons.favorite_outline_outlined,
+                    color: isLiked ? Colors.pink : Colors.grey,
+                  );
+                },
+              ),
+            ],
           ),
         );
       },
@@ -44,9 +60,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Startup Name Generator',
+      
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Startup Name Generator'),
+          title: const Text('Startup Name Generator', style: TextStyle(color: Colors.black)),
+          backgroundColor: Color.fromARGB(255, 252, 250, 250),
         ),
         body: const Center(
           child: RandomWords(),
